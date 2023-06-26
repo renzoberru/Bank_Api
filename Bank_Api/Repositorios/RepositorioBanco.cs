@@ -14,9 +14,10 @@ namespace Bank_Api.Repositorios
             _dbcontext = bdcontext;
         }
 
-        public BancoDto GetBanco(string uid)
+        public async Task<Banco> GetBanco(string uid)
         {
-            throw new NotImplementedException();
+            var banco = await _dbcontext.Banco.FirstOrDefaultAsync(b => b.Uid.CompareTo(uid) == 0);
+            return banco;            
         }
 
         public async Task<int> InsertarBanco(Banco banco)

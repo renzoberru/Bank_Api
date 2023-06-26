@@ -18,7 +18,17 @@ namespace Bank_Api.Controllers
         {
             _servicioBanco = servicioBanco;
         }
-        [HttpPost("poblar-basedatos")]
+
+        // POST: api/Banco/poblarBasedatos
+        /// <summary>
+        /// Pobla la base de datos ../Datos/bancos.db con los bancos generados de la api https://random-data-api.com/api/v2/banks
+        /// </summary>
+        /// <remarks>
+        /// Devuelve:
+        ///     200OK si fue poblada exitosamente
+        ///     500: si hubo un Error al obtener los datos de la API.
+        /// </remarks>        
+        [HttpPost("poblarBasedatos")]
         public async Task<IActionResult> PoblarBaseDatos()
         {
             using var httpClient = new HttpClient();
@@ -46,6 +56,12 @@ namespace Bank_Api.Controllers
             }
             var creado = _servicioBanco.InsertarBanco(nuevoBanco);
             return Ok(creado);
+        }
+
+        [HttpGet("ObtenerBanco/")]
+        public async Task<IActionResult> ObtenerBanco([FromBody] BancoCreadorDto nuevoBanco)
+        {
+            
         }
     }
 }

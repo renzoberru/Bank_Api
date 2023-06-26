@@ -17,12 +17,14 @@ namespace Bank_Api.Servicios
             _mapeador = mapeador;
         }
 
-        public BancoDto GetBanco(string uid)
+        public async Task<BancoDto> GetBanco(string uid)
         {
-            throw new NotImplementedException();
+            var banco = await _repositorioBanco.GetBanco(uid);
+            var bancoDto = _mapeador.Map<BancoDto>(banco);
+            return bancoDto;            
         }
 
-        public async bool InsertarBanco(BancoCreadorDto nuevoBanco)
+        public async Task<bool> InsertarBanco(BancoCreadorDto nuevoBanco)
         {
             if (nuevoBanco == null) 
             {
